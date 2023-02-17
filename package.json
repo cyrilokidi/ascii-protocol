@@ -1,0 +1,15 @@
+{
+  "name": "asci-protocol",
+  "version": "0.0.1",
+  "description": "ASCII protocol parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ascii",
+    "protocol"
+  ],
+  "author": "Cyril Okidi <okidicyril@gmail.com>",
+  "license": "ISC"
+}
