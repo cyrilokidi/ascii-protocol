@@ -13,6 +13,8 @@ export interface IProps {
 }
 
 export default class ASCII {
+    private readonly start = '*';
+    private readonly end = '#';
     private readonly d: string;
 
     constructor(readonly data: string) {
@@ -52,5 +54,11 @@ export default class ASCII {
             default:
                 throw new Error(`Invalid command ${cmd}`);
         }
+    }
+
+    public get heartbeat(): string {
+        if (this.cmd !== ECmd.HTBT)
+            throw new Error('Not a heartbeat transmission');
+        return `${this.start}${this.supplier},${this.imei},${this.cmd}${this.end}`;
     }
 }

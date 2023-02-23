@@ -5,6 +5,7 @@ export interface ITestData {
     supplier: string;
     imei: string;
     type: EType;
+    heartbeat: string;
 }
 
 export const data: ITestData[] = [
@@ -16,5 +17,6 @@ export const data: ITestData[] = [
         supplier: "HQ",
         imei: "135790246811220",
         type: EType.HEART_BEAT,
+        heartbeat: "*HQ,135790246811220,HTBT#"
     }
 ];

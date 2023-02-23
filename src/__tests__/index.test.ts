@@ -3,7 +3,7 @@ import { data, ITestData } from "../data";
 
 describe('ASCII', () => {
     data.map((d: ITestData, i: number) => {
-        describe(`Sample data ${i + 1}`, () => {
+        describe(`[${d.type}] sample data ${i + 1}`, () => {
             const ascii = new ASCII(d.ascii);
 
             test('Supplier name', () => {
@@ -16,6 +16,10 @@ describe('ASCII', () => {
 
             test('Transmission type', () => {
                 expect(ascii.type).toEqual(d.type);
+            });
+
+            test('Heartbeat response', () => {
+                expect(ascii.heartbeat).toEqual(d.heartbeat);
             });
         });
     });
