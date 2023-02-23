@@ -1,3 +1,5 @@
 export default class ASCII {
-    constructor() { }
+    constructor(readonly data: string) {
+        console.log(data);
+    }
 }
