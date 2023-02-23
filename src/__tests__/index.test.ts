@@ -12,7 +12,11 @@ describe('ASCII', () => {
 
             test('Device IMEI', () => {
                 expect(ascii.imei).toEqual(d.imei);
-            })
+            });
+
+            test('Transmission type', () => {
+                expect(ascii.type).toEqual(d.type);
+            });
         });
     });
 });

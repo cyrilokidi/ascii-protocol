@@ -1,7 +1,10 @@
+import { EType } from ".";
+
 export interface ITestData {
     ascii: string;
     supplier: string;
     imei: string;
+    type: EType;
 }
 
 export const data: ITestData[] = [
@@ -10,7 +13,8 @@ export const data: ITestData[] = [
     // },
     {
         ascii: "*HQ,135790246811220,HTBT#",
-        supplier: "*HQ",
-        imei: "135790246811220"
+        supplier: "HQ",
+        imei: "135790246811220",
+        type: EType.HEART_BEAT,
     }
 ];

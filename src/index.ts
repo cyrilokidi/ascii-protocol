@@ -1,9 +1,15 @@
+export enum ECmd {
+    ["HTBT"] = "HTBT",
+}
+
+export enum EType {
+    ["HEART_BEAT"] = "HEART_BEAT"
+}
+
 export interface IProps {
     supplierName: string;
     imei: string;
-    cmd: string;
-    time: string;
-    params: string[]
+    cmd: ECmd;
 }
 
 export default class ASCII {
@@ -15,20 +21,36 @@ export default class ASCII {
 
     private get props(): IProps {
         const _: string[] = this.d.split(',');
-        return {
+        const props: IProps = {
             supplierName: _[0],
             imei: _[1],
-            cmd: _[2],
-            time: _[3],
-            params: _.slice(4, -1)
-        } as IProps;
+            cmd: _[2] as ECmd,
+        };
+
+        return props;
     }
 
     public get supplier(): string {
-        return this.props.supplierName
+        return this.props.supplierName.slice(1);
     }
 
     public get imei(): string {
         return this.props.imei;
+    }
+
+    private get cmd(): ECmd {
+        return this.props.cmd.slice(0, -1) as ECmd;
+    }
+
+    public get type(): EType {
+        const cmd: ECmd = this.cmd;
+
+        switch (cmd) {
+            case ECmd.HTBT:
+                return EType.HEART_BEAT;
+
+            default:
+                throw new Error(`Invalid command ${cmd}`);
+        }
     }
 }
