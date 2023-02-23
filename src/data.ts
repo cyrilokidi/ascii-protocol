@@ -27,5 +27,13 @@ export const data: ITestTransmission[] = [
             imei: "135790246811220",
             type: EType.LOGIN
         }
+    },
+    {
+        transmission: "*HQ,865205030330012,V1,145452,A,2240.55181,N,11358.32389,E,0.00,0,100815,FFFFFBFF#",
+        data: {
+            supplier: "HQ",
+            imei: "865205030330012",
+            type: EType.GPS
+        }
     }
 ];
