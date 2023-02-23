@@ -34,14 +34,12 @@ export default class ASCII {
     }
 
     private get props(): IProps {
-        const _: string[] = this.d.split(',');
-        const props: IProps = {
-            supplierName: _[0],
-            imei: _[1],
-            cmd: _[2] as ECmd,
-        };
-
-        return props;
+        const p: string[] = this.d.split(',');
+        return {
+            supplierName: p[0],
+            imei: p[1],
+            cmd: p[2] as ECmd,
+        } as IProps;
     }
 
     public get supplier(): string {
@@ -52,12 +50,8 @@ export default class ASCII {
         return this.props.imei;
     }
 
-    private get cmd(): ECmd {
-        return this.props.cmd as ECmd;
-    }
-
     public get type(): EType {
-        const cmd: ECmd = this.cmd;
+        const cmd: ECmd = this.props.cmd as ECmd;
 
         switch (cmd) {
             case ECmd.HTBT:
