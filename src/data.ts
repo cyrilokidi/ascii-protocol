@@ -1,22 +1,31 @@
 import { EType } from ".";
 
-export interface ITestData {
-    ascii: string;
+export interface ITestTransmissionData {
     supplier: string;
     imei: string;
     type: EType;
-    heartbeat: string;
 }
 
-export const data: ITestData[] = [
-    // {
-    //     ascii: "*HQ,865205030330012,V4,S2,150950,151007,A,2240.55503,N,11358.35174,E,0.85,0,100815, FFFFFBFF #"
-    // },
+export interface ITestTransmission {
+    transmission: string;
+    data: ITestTransmissionData;
+}
+
+export const data: ITestTransmission[] = [
     {
-        ascii: "*HQ,135790246811220,HTBT#",
-        supplier: "HQ",
-        imei: "135790246811220",
-        type: EType.HEART_BEAT,
-        heartbeat: "*HQ,135790246811220,HTBT#"
+        transmission: "*HQ,135790246811220,HTBT#",
+        data: {
+            supplier: "HQ",
+            imei: "135790246811220",
+            type: EType.HEART_BEAT
+        }
+    },
+    {
+        transmission: "*HQ,135790246811220,V0#",
+        data: {
+            supplier: "HQ",
+            imei: "135790246811220",
+            type: EType.LOGIN
+        }
     }
 ];

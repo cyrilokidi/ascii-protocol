@@ -1,9 +1,11 @@
 export enum ECmd {
     ["HTBT"] = "HTBT",
+    ["V0"] = "V0"
 }
 
 export enum EType {
-    ["HEART_BEAT"] = "HEART_BEAT"
+    ["HEART_BEAT"] = "HEART_BEAT",
+    ["LOGIN"] = "LOGIN",
 }
 
 export interface IProps {
@@ -51,14 +53,11 @@ export default class ASCII {
             case ECmd.HTBT:
                 return EType.HEART_BEAT;
 
+            case ECmd.V0:
+                return EType.LOGIN;
+
             default:
                 throw new Error(`Invalid command ${cmd}`);
         }
-    }
-
-    public get heartbeat(): string {
-        if (this.cmd !== ECmd.HTBT)
-            throw new Error('Not a heartbeat transmission');
-        return `${this.start}${this.supplier},${this.imei},${this.cmd}${this.end}`;
     }
 }

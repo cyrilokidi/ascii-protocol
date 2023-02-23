@@ -1,25 +1,21 @@
 import ASCII from '../index';
-import { data, ITestData } from "../data";
+import { data, ITestTransmission } from "../data";
 
 describe('ASCII', () => {
-    data.map((d: ITestData, i: number) => {
-        describe(`[${d.type}] sample data ${i + 1}`, () => {
-            const ascii = new ASCII(d.ascii);
+    data.map((t: ITestTransmission) => {
+        describe(`"${t.data.type}" transmission`, () => {
+            const transmission: ASCII = new ASCII(t.transmission);
 
-            test('Supplier name', () => {
-                expect(ascii.supplier).toEqual(d.supplier);
+            test(`Supplier name should be "${t.data.supplier}"`, () => {
+                expect(transmission.supplier).toEqual(t.data.supplier);
             });
 
-            test('Device IMEI', () => {
-                expect(ascii.imei).toEqual(d.imei);
+            test(`Device IMEI should be "${t.data.imei}"`, () => {
+                expect(transmission.imei).toEqual(t.data.imei);
             });
 
-            test('Transmission type', () => {
-                expect(ascii.type).toEqual(d.type);
-            });
-
-            test('Heartbeat response', () => {
-                expect(ascii.heartbeat).toEqual(d.heartbeat);
+            test(`Transmission type should be "${t.data.type}"`, () => {
+                expect(transmission.type).toEqual(t.data.type);
             });
         });
     });
