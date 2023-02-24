@@ -16,6 +16,9 @@ export interface IProps {
     cmd: ECmd;
 }
 
+/**
+ * ASCII protocol parser.
+ */
 export default class ASCII {
     private readonly startTag = "*";
     private readonly endTag = "#";
