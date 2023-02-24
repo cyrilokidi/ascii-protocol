@@ -34,11 +34,12 @@ export default class ASCII {
     }
 
     private get props(): IProps {
-        const p: string[] = this.d.split(',');
+        const [supplierName, imei, cmd]: string[] = this.d.split(',');
+
         return {
-            supplierName: p[0],
-            imei: p[1],
-            cmd: p[2] as ECmd,
+            supplierName,
+            imei,
+            cmd: cmd as ECmd,
         } as IProps;
     }
 
