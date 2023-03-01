@@ -1,6 +1,6 @@
 {
   "name": "ascii-protocol",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ASCII protocol parser",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
