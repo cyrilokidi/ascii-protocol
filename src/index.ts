@@ -54,7 +54,7 @@ export default class ASCII {
         return this.props.imei;
     }
 
-    public get type(): EType {
+    public get type(): EType | null {
         const cmd: ECmd = this.props.cmd as ECmd;
 
         switch (cmd) {
@@ -68,7 +68,7 @@ export default class ASCII {
                 return EType.GPS;
 
             default:
-                throw new Error(`Invalid command ${cmd}`);
+                return null;
         }
     }
 }
