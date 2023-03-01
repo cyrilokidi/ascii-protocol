@@ -1,6 +1,6 @@
 {
   "name": "ascii-protocol",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ASCII protocol parser",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   ],
   "author": "Cyril Okidi <okidicyril@gmail.com>",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "@types/jest": "^29.4.0",
     "jest": "^29.4.3",
     "ts-jest": "^29.0.5",
