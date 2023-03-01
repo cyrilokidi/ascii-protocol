@@ -1,20 +1,23 @@
-import { EType } from ".";
+import { EDataValidity, EType, IGPSData } from ".";
 
-export interface ITestTransmissionData {
+export type TTestTransmissionPayloadData = IGPSData;
+
+export interface ITestTransmissionPayload {
     supplier: string;
     imei: string;
     type: EType;
+    data?: TTestTransmissionPayloadData;
 }
 
 export interface ITestTransmission {
     transmission: string;
-    data: ITestTransmissionData;
+    payload: ITestTransmissionPayload;
 }
 
 export const data: ITestTransmission[] = [
     {
         transmission: "*HQ,135790246811220,HTBT#",
-        data: {
+        payload: {
             supplier: "HQ",
             imei: "135790246811220",
             type: EType.HEART_BEAT
@@ -22,7 +25,7 @@ export const data: ITestTransmission[] = [
     },
     {
         transmission: "*HQ,135790246811220,V0#",
-        data: {
+        payload: {
             supplier: "HQ",
             imei: "135790246811220",
             type: EType.LOGIN
@@ -30,10 +33,22 @@ export const data: ITestTransmission[] = [
     },
     {
         transmission: "*HQ,865205030330012,V1,145452,A,2240.55181,N,11358.32389,E,0.00,0,100815,FFFFFBFF#",
-        data: {
+        payload: {
             supplier: "HQ",
             imei: "865205030330012",
-            type: EType.GPS
+            type: EType.GPS,
+            data: {
+                time: "145452",
+                validity: "A" as EDataValidity,
+                latitude: 2240.55181,
+                latitudeDirection: "N",
+                longitude: 11358.32389,
+                longitudeDirection: "E",
+                speed: 0,
+                direction: 0,
+                date: "100815",
+                general: "FFFFFBFF"
+            }
         }
     }
 ];
