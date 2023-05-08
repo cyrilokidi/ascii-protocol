@@ -4,7 +4,16 @@ import { data, ITestTransmission } from "../data";
 describe('ASCII', () => {
     data.map((t: ITestTransmission) => {
         describe(`"${t.payload.type}" transmission`, () => {
-            const transmission: ASCII = new ASCII(t.transmission);
+            const transmission: ASCII = new ASCII(t.transmission, {
+                startTag: {
+                    position: 1,
+                    match: "*"
+                },
+                endTag: {
+                    position: -1,
+                    match: "#"
+                }
+            });
 
             if (transmission.type === EType.GPS)
                 console.log('Transmission: ', transmission.data);

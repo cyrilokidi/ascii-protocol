@@ -1,3 +1,5 @@
+import { ASCIIProtocolError } from "./ascii-protocol.error";
+
 export enum ECmd {
     ["HTBT"] = "HTBT",
     ["V0"] = "V0",
@@ -35,24 +37,47 @@ export interface IGPSData {
     general: string;
 }
 
+export interface IStartTagOptions {
+    position: number;
+    match: string;
+}
+
+export interface IEndTagOptions {
+    position: number;
+    match: string;
+}
+
+export interface IASCIIProtocolOptions {
+    startTag?: IStartTagOptions;
+    endTag?: IEndTagOptions;
+}
+
 /**
  * ASCII protocol parser.
  */
 export default class ASCII {
-    private readonly startTag = "*";
-    private readonly endTag = "#";
     private readonly p: string;
 
-    constructor(readonly payload: string) {
+    constructor(readonly payload: string, options?: IASCIIProtocolOptions) {
         this.p = payload;
-        const startTag: string = this.p[0];
-        if (startTag !== this.startTag)
-            throw new Error(`Invalid start tag "${startTag}"`);
-        const endTag: string = this.p[this.p.length - 1];
-        if (endTag !== this.endTag)
-            throw new Error(`Invalid end tag "${endTag}"`)
-        this.p = this.p.slice(1);
-        this.p = this.p.slice(0, -1);
+
+        if (options?.startTag) {
+            if (options.startTag.position < 0)
+                throw new ASCIIProtocolError("Start tag cannot be a negative number.");
+            const startTag: string = this.p.slice(0, options.startTag.position)
+            if (startTag !== options.startTag.match)
+                throw new ASCIIProtocolError(`Start tag do not match "${options.startTag.match}"`);
+            this.p = this.p.slice(options.startTag.position);
+
+            if (options?.endTag) {
+                if (options.endTag.position > -1)
+                    throw new ASCIIProtocolError("End tag cannot be a positive number.");
+                const endTag: string = this.p.slice(options.endTag.position)
+                if (endTag !== options.endTag.match)
+                    throw new ASCIIProtocolError(`End tag do not match "${options.endTag.match}"`);
+                this.p = this.p.slice(0, options.endTag.position);
+            }
+        }
     }
 
     private get props(): IProps {
@@ -91,7 +116,7 @@ export default class ASCII {
         }
     }
 
-    public get data(): null | IGPSData {
+    public get data(): IGPSData {
         const cmd: ECmd = this.props.cmd as ECmd;
 
         switch (cmd) {
@@ -125,7 +150,7 @@ export default class ASCII {
                 return result;
 
             default:
-                return null;
+                throw new ASCIIProtocolError('Invalid command.');
         }
     }
 }
